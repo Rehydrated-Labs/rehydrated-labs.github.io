@@ -13,3 +13,4 @@ When adding new pages update header (Header class in [script.js](script.js))
 [Theyoungster](https://github.com/Theyoungster) - project owner
 [Tungstenfur](https://github.com/Tungstenfur) - wiki creator
 
+![](NoAi.png)
