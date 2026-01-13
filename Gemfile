@@ -1,2 +1,2 @@
 
-gem "jekyll", "~> 4.4"
+gem "jekyll", "~> 2.4.22"
