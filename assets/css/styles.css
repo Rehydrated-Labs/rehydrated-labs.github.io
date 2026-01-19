@@ -1,26 +1,6 @@
+@import url(themes.css);
+
 :root {
-    /* Light Theme Colors */
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8f9fa;
-    --bg-tertiary: #e9ecef;
-    --text-primary: #212529;
-    --text-secondary: #6c757d;
-    --text-tertiary: #adb5bd;
-    --border-color: #dee2e6;
-    --shadow: rgba(0, 0, 0, 0.1);
-    --shadow-hover: rgba(0, 0, 0, 0.15);
-    
-    /* Accent Colors */
-    --accent-primary: #0066cc;
-    --accent-hover: #0052a3;
-    --accent-light: #e6f2ff;
-    
-    /* Semantic Colors */
-    --success: #28a745;
-    --info: #17a2b8;
-    --warning: #ffc107;
-    --danger: #dc3545;
-    
     /* Layout */
     --header-height: 70px;
     --sidebar-width: 280px;
@@ -33,20 +13,6 @@
     
     /* Transitions */
     --transition: all 0.15s ease;
-}
-
-/* Dark Theme */
-[data-theme="dark"] {
-    --bg-primary: #1a1a1a;
-    --bg-secondary: #2d2d2d;
-    --bg-tertiary: #404040;
-    --text-primary: #e9ecef;
-    --text-secondary: #adb5bd;
-    --text-tertiary: #6c757d;
-    --border-color: #404040;
-    --shadow: rgba(0, 0, 0, 0.3);
-    --shadow-hover: rgba(0, 0, 0, 0.4);
-    --accent-light: #1a3a52;
 }
 
 * {
