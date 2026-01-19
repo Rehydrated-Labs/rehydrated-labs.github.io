@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | default: site.title }}</title>
-    <link rel="stylesheet" href="/assets/css/themes.css">
-    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/themes.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/styles.css">
     <script> // Automatically loads saved theme or uses system preference.
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
