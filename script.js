@@ -84,14 +84,14 @@ class Header extends HTMLElement {
 
 customElements.define('site-header', Header);
 */
-// Theme Toggle
+
+/** 
+ * Theme Toggle
+ * 
+ * The actual theme initialization and setup is in the default page layout.
+ */
 function initThemeToggle() {
     const themeToggle = document.getElementById('themeToggle');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    // Load saved theme or use system preference
-    const savedTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
-    document.documentElement.setAttribute('data-theme', savedTheme);
     
     themeToggle.addEventListener('click', () => {
         const currentTheme = document.documentElement.getAttribute('data-theme');
