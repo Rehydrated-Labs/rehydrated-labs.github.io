@@ -34,6 +34,11 @@ body {
     transition: var(--transition);
 }
 
+a {
+    color: var(--text-primary);
+    transition: var(--transition);
+}
+
 /* Container */
 .container {
     max-width: var(--max-width);
@@ -68,6 +73,11 @@ body {
     transition: var(--transition);
 }
 
+/* remove "logo" link underline */
+.header-content a {
+    text-decoration: none;
+}
+
 /* Navigation */
 .nav {
     display: flex;
@@ -89,6 +99,11 @@ body {
     height: 2px;
     background-color: var(--text-primary);
     transition: var(--transition);
+}
+
+nav ul, nav ol, nav li {
+    margin: 0;
+    padding: 0;
 }
 
 .nav-list {
@@ -239,6 +254,9 @@ body {
     font-size: 1.2rem;
     color: var(--text-primary);
     transition: var(--transition);
+    margin: 0;
+    padding: 0;
+    border: none;
 }
 
 .sidebar-toggle {
@@ -253,6 +271,7 @@ body {
 
 .toc-list {
     list-style: none;
+    padding-left: unset;
 }
 
 .toc-item {
@@ -279,6 +298,7 @@ body {
     list-style: none;
     margin-left: 16px;
     margin-top: 4px;
+    padding: unset;
 }
 
 .toc-sublist .toc-link {
@@ -302,7 +322,7 @@ body {
     transition: var(--transition);
 }
 
-.article-header h1 {
+h1 {
     font-size: 2.5rem;
     color: var(--text-primary);
     margin-bottom: 15px;
@@ -327,17 +347,17 @@ body {
     transition: var(--transition);
 }
 
-.article-content h2 {
+h2 {
     font-size: 2rem;
-    margin-top: 40px;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
     color: var(--text-primary);
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 2px;
+    border-bottom: 2px solid var(--border-color);
     transition: var(--transition);
 }
 
-.article-content h3 {
+h3 {
     font-size: 1.5rem;
     margin-top: 30px;
     margin-bottom: 15px;
@@ -345,21 +365,18 @@ body {
     transition: var(--transition);
 }
 
-.article-content p {
+p {
     margin-bottom: 16px;
-    color: var(--text-secondary);
     transition: var(--transition);
 }
 
-.article-content ul,
-.article-content ol {
+ul, ol {
     margin-bottom: 16px;
     padding-left: 30px;
 }
 
-.article-content li {
+li {
     margin-bottom: 8px;
-    color: var(--text-secondary);
     transition: var(--transition);
 }
 
