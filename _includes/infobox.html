@@ -1,0 +1,58 @@
+{% if page.infobox and page.infobox.type %}
+  {% assign data = page.infobox %}
+  {% assign schema = site.data.infoboxes[data.type] %}
+
+  {% if schema %}
+  <aside class="infobox infobox-{{ data.type }}">
+    <div class="infobox-title">
+      {{ data.name | default: page.title }}
+    </div>
+
+    {%- if schema.image -%}
+      {%- assign img_field = schema.image.field -%}
+      {%- if data[img_field] -%}
+        <figure class="infobox-image">
+          <img
+            src="/assets/img/{{ data[img_field] }}"
+            alt="{{ data[schema.image.alt_text] | default: page.title }}"
+            loading="lazy"
+          >
+          {%- if schema.image.caption and data[schema.image.caption] -%}
+            <figcaption>
+              {{ data[schema.image.caption] }}
+            </figcaption>
+          {%- endif -%}
+        </figure>
+      {%- endif -%}
+    {%- endif -%}
+
+    <ul>
+      {%- for field in schema.fields -%}
+        {%- assign key = field[0] -%}
+        {%- assign label = field[1] -%}
+
+        {%- if data[key] -%}
+          <li>
+            <strong>{{ label }}:</strong>
+            {{ data[key] }}
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if data.extras -%}
+        {%- for extra in data.extras -%}
+          <li>
+            <strong>
+              {{ extra[0]
+                | replace: '_', ' '
+                | capitalize
+              }}:
+            </strong>
+            {{ extra[1] }}
+          </li>
+        {%- endfor -%}
+      {%- endif -%}
+    </ul>
+  </aside>
+  {% endif %}
+{% endif %}

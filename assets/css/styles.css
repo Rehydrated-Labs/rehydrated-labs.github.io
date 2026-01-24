@@ -380,6 +380,48 @@ li {
     transition: var(--transition);
 }
 
+.infobox {
+    position: relative;
+    clear: right;
+    margin: 0 0 20px 20px;
+    width: 300px;
+    float: right;
+    padding: 15px;
+    border: 2px solid var(--bg-primary);
+    background-color: var(--bg-primary);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px var(--shadow);
+    transition: var(--transition);
+
+    & .infobox-title {
+        display: flex;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    & ul, ol {
+        list-style: none;
+        padding: 0;
+    }
+
+    & .infobox-image {
+        margin: 0 0 0.75em 0;
+        text-align: center;
+    }
+
+    & .infobox-image img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    & .infobox-image figcaption {
+        font-size: 0.85em;
+        color: var(--text-tertiary);
+        margin-top: 0.25em;
+    }
+}
+
 .article-content section {
     margin-bottom: 40px;
 }

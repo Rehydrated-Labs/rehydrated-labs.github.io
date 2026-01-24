@@ -1,0 +1,10 @@
+mobs:
+  label: Mobs
+  image:
+    field: image
+    caption: image_caption
+    alt_text: image_alt_text
+  fields:
+    behavior: Behavior
+    health: Health points
+    speed: Speed
