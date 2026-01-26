@@ -205,7 +205,7 @@ function initNavDropdown() {
     
 function initSearch() {
     const input = document.getElementById('search-input');
-    const results = document.getElementById('results-container');
+    const results = document.getElementById('results-list');
     if (!input || !results) return;
     const searchUrl = input.dataset.searchJson || '/search.json';
     const s = document.createElement('script');
@@ -218,13 +218,15 @@ function initSearch() {
             searchResultTemplate: `
             <li class="sjr-item">
                 <a href="{url}">
-                <strong>{title}</strong>
+                    <div class="sjr-meta">
+                        <strong>{title}</strong>
+                        <small style="margin-left:.5rem; opacity:.7">({type})</small>
+                    </div>
+                    <div class="sjr-excerpt">{content}</div>
                 </a>
-                <small style="margin-left:.5rem; opacity:.7">({type})</small>
-                <div class="sjr-excerpt">{content}</div>
             </li>`,
             noResultsText: 'No results',
-            limit: 50,
+            limit: 5,
             fields: ['title','content']
         });
         document.addEventListener('keydown', (e) => {

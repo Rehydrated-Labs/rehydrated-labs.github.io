@@ -7,7 +7,7 @@ layout: none
   {% comment %} only pages under the pages/ folder and not explicitly excluded {% endcomment %}
   {% if item.path contains 'pages/' and item.search != false %}
     {% comment %} render cleaned, truncated content for indexing {% endcomment %}
-    {% assign content_text = item.content | markdownify | strip_html | strip_newlines | replace: '\r', '' | replace: '\n', ' ' | strip | truncatewords: 120 %}
+    {% assign content_text = item.content | markdownify | strip_html | strip_newlines | replace: '\r', '' | replace: '\n', ' ' | strip | truncatewords: 15 %}
 
     {% comment %} page-level entry (only if it has a title) {% endcomment %}
     {% if item.title %}

@@ -186,6 +186,94 @@ nav ul, nav ol, nav li {
     gap: 15px;
 }
 
+textarea:focus, input:focus{
+    outline: none;
+}
+
+.search {
+    display: inline-block;
+    flex-direction: column;
+    position: relative;
+    flex-grow: 1;
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+#search-input {
+    background-color: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    color: var(--text-primary);
+    padding: 0 10px;
+    height: 100%;
+    width: 350px;
+    position: relative;
+    transition: var(--transition);
+
+    &:focus {
+        border-color: var(--accent-primary);
+    }
+}
+
+#results-container {
+    position: absolute;
+    left: 0;
+    z-index: 50;
+    background-color: var(--bg-primary);
+    width: 100%;
+    border: 2px solid var(--border-color);
+    display: none;
+    transition: var(--transition);
+    margin-top: 8px;
+    box-shadow: 0 4px 6px var(--shadow);
+    border-radius: var(--border-radius);
+}
+
+/* These four CSS rules below are not my best...
+They essentially say "hey, I want the search results to come back only when
+the box is focused (to prevent it from staying when a user stops using the
+search box) and not empty (to prevent an empty list from showing up annoyingly
+at the bottom of the search box before the user has even typed anything).*/
+.search:focus-within #results-container {
+    display: block;
+}
+.search:focus-within #results-list {
+    display: block;
+}
+/* Hide results when placeholder is visible (input is empty) */
+#search-input:placeholder-shown ~ #results-container {
+  display: none !important;
+}
+/* Show when focused (even if placeholder is hidden) */
+.search:focus-within #results-container {
+  display: block;
+}
+
+#results-list {
+    list-style: none;
+    display: none;
+    line-height: 1.2;
+    margin: 8px;
+
+    & li {
+        padding: 4px;
+        border-radius: var(--border-radius);
+
+        & .sjr-meta {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    & li:not(:last-child) {
+        margin-bottom: 8px;
+    }
+
+    & li:hover {
+        background-color: var(--bg-secondary);
+    }
+}
+
 .theme-toggle {
     background: none;
     border: none;
