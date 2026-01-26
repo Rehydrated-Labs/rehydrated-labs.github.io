@@ -4,40 +4,63 @@ layout: none
 [
 {% assign sep = "" %}
 {% for item in site.pages %}
-  {% comment %} only pages under the pages/ folder and not explicitly excluded {% endcomment %}
   {% if item.path contains 'pages/' and item.search != false %}
-    {% comment %} render cleaned, truncated content for indexing {% endcomment %}
-    {% assign content_text = item.content | markdownify | strip_html | strip_newlines | replace: '\r', '' | replace: '\n', ' ' | strip | truncatewords: 15 %}
-
-    {% comment %} page-level entry (only if it has a title) {% endcomment %}
     {% if item.title %}
+      {% comment %} Full cleaned content for full-text search. {% endcomment %}
+      {% assign full_content = item.content | markdownify | strip_html | normalize_whitespace | strip_newlines | replace: '\r', '' | replace: '\n', ' ' | strip %}
+
+      {% comment %} Extract lead paragraph === {% endcomment %}
+      {% assign lines = item.content | split: '\n' %}
+      {% assign lead_raw_lines = "" %}
+      {% assign skipped_h1 = false %}
+      {% assign collecting = false %}
+
+      {% for line in lines %}
+        {% assign trimmed_line = line | strip %}
+
+        {% comment %} Find and skip the very first # Heading line {% endcomment %}
+        {% if trimmed_line != blank and skipped_h1 == false %}
+          {% if trimmed_line contains '# ' and trimmed_line contains '#' %}
+            {% assign skipped_h1 = true %}
+            {% continue %}
+          {% endif %}
+        {% endif %}
+
+        {% comment %} Start collecting after skip (or if no heading) {% endcomment %}
+        {% if trimmed_line != blank or collecting %}
+          {% assign collecting = true %}
+          {% assign lead_raw_lines = lead_raw_lines | append: line | append: '\n' %}
+        {% endif %}
+
+        {% comment %} Stop at first blank line after we started collecting {% endcomment %}
+        {% if collecting and trimmed_line == blank %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+
+      {% comment %} Clean the collected lead paragraph {% endcomment %}
+      {% assign lead_excerpt = lead_raw_lines | markdownify | strip_html | normalize_whitespace | strip_newlines | replace: '\r', '' | replace: '\n', ' ' | strip %}
+
+      {% comment %} Fallback if lead is empty or useless {% endcomment %}
+      {% if lead_excerpt == "" or lead_excerpt contains item.title %}
+        {% assign lead_excerpt = item.excerpt | markdownify | strip_html | normalize_whitespace | strip_newlines | replace: '\r', '' | replace: '\n', ' ' | strip %}
+      {% endif %}
+      {% if lead_excerpt == "" %}
+        {% assign lead_excerpt = full_content | truncatewords: 20 %}
+      {% endif %}
+
+      {% assign lead_excerpt = lead_excerpt | remove_first: item.title | strip %}
+
       {% if sep != "" %},{% endif %}
       {% assign sep = "," %}
       {
         "title": {{ item.title | jsonify }},
         "url": {{ item.url | relative_url | jsonify }},
-        "content": {{ content_text | jsonify }},
+        "content": {{ full_content | jsonify }},
+        "excerpt": {{ lead_excerpt | jsonify }},
         "type": "page"
       }
     {% endif %}
-
-    {% comment %} one entry per top-level H1 in the raw markdown source {% endcomment %}
-    {% assign lines = item.content | split: '\n' %}
-    {% for line in lines %}
-      {% assign prefix = line | slice: 0, 2 %}
-      {% if prefix == '# ' %}
-        {% assign heading_text = line | remove_first: '# ' | strip %}
-        {% assign heading_id = heading_text | slugify %}
-        {% if sep != "" %},{% endif %}
-        {% assign sep = "," %}
-        {
-          "title": {{ heading_text | jsonify }},
-          "url": {{ item.url | relative_url | append: '#' | append: heading_id | jsonify }},
-          "content": {{ content_text | jsonify }},
-          "type": "heading"
-        }
-      {% endif %}
-    {% endfor %}
   {% endif %}
 {% endfor %}
 ]

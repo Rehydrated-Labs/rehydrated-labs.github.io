@@ -222,7 +222,7 @@ function initSearch() {
                         <strong>{title}</strong>
                         <small style="margin-left:.5rem; opacity:.7">({type})</small>
                     </div>
-                    <div class="sjr-excerpt">{content}</div>
+                    <div class="sjr-excerpt">{excerpt}</div>
                 </a>
             </li>`,
             noResultsText: 'No results',
